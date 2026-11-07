@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<title>HAN-S Website</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&amp;family=Cairo:wght@400;600;700&amp;family=DM+Sans:wght@400;500;700&amp;family=Reem+Kufi:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.hs{--bg:#14120E; --bg2:#1C1913; --forest:#1F3325; --forest2:#344A33;
+  --ink:#F1E8D4; --mute:#BDB29C; --line:rgba(241,232,212,.14);
+  --gold:#F2B51E; --gold-ink:#1B1403; --beige:#EBE0CE; --beige-ink:#1E1A12; --beige-mute:#5A5140;
+  --max:1200px;
+  
+  --accent:var(--gold); --accent-ink:var(--gold-ink);
+  --light:var(--beige); --light-ink:var(--beige-ink); --light-mute:var(--beige-mute);}
+.hs *{box-sizing:border-box}
+.hs{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo','DM Sans',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.hs h1,.hs h2,.hs h3{font-family:'Reem Kufi','Cairo',sans-serif;font-weight:700;line-height:1.25;margin:0;letter-spacing:0}
+.hs.en h1,.hs.en h2,.hs.en h3{font-family:'Bricolage Grotesque','DM Sans',sans-serif;font-weight:800;line-height:1.05;letter-spacing:-.02em}
+.hs.en{font-family:'DM Sans','Cairo',system-ui,sans-serif;line-height:1.6}
+.hs a{color:inherit;text-decoration:none}
+.hs .wrap{max-width:var(--max);margin:0 auto;padding-inline:24px}
+.hs a:focus-visible,.hs button:focus-visible,.hs input:focus-visible,.hs select:focus-visible,.hs video:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.hs .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 28px;border-radius:999px;background:var(--gold);color:var(--gold-ink);font:inherit;font-weight:700;border:0;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s}
+.hs .btn:hover{background:#F7C84A;transform:translateY(-2px);box-shadow:0 10px 30px -10px rgba(242,181,30,.6)}
+.hs .btn.ghost{background:none;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.hs .btn.ghost:hover{background:rgba(241,232,212,.08)}
+.hs .btn.alt{background:var(--forest2);color:var(--beige)}
+.hs .btn.alt:hover{background:#3A5A3F;box-shadow:none}
+.hs .nav{background:rgba(20,18,14,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hs .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px}
+.hs .logo{display:flex;align-items:center;gap:12px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:.02em;line-height:1}
+.hs .logo i{width:10px;height:10px;border-radius:50%;background:var(--gold);display:inline-block}
+.hs .logo .mark{width:46px;height:46px;flex:none;border-radius:50%;display:block}
+.hs .logo small{display:block;font-family:'DM Sans',sans-serif;font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+.hs .links{display:flex;gap:30px;font-weight:600;color:var(--mute)}
+.hs .links a{transition:color .2s}
+.hs .links a:hover{color:var(--gold)}
+.hs .tools{display:flex;align-items:center;gap:12px}
+.hs .lang{min-height:44px;min-width:44px;padding:0 16px;background:none;color:var(--ink);border:1px solid var(--line);border-radius:999px;font:inherit;font-weight:700;cursor:pointer}
+.hs .lang:hover{background:rgba(241,232,212,.08)}
+@media(max-width:900px){.hs .nav .wrap{flex-wrap:wrap;padding-block:10px}
+.hs .links{order:3;width:100%;overflow-x:auto;gap:24px;padding-bottom:6px;white-space:nowrap}}
+.hs .hero{position:relative;min-height:720px;display:grid;align-items:center;isolation:isolate;overflow:hidden}
+.hs .hero-bg{position:absolute;inset:0;z-index:-3;background:
+  radial-gradient(45% 60% at 22% 38%,rgba(242,181,30,.26),transparent 65%),
+  radial-gradient(40% 55% at 30% 45%,rgba(255,214,120,.10),transparent 60%),
+  radial-gradient(50% 60% at 12% 95%,rgba(47,74,51,.60),transparent 62%),
+  linear-gradient(160deg,#1D1A11,#14120E 55%,#0F1511)}
+.hs .hero-img{position:absolute;inset:-4%;z-index:-2;background:url(./assets/5e43d076c107d86dea34420d72d2733b.jpg) center/cover no-repeat;animation:kb 26s ease-in-out infinite alternate}
+.hs .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:
+  linear-gradient(180deg,rgba(20,18,14,.35) 0%,transparent 35%,var(--bg) 100%),
+  linear-gradient(270deg,rgba(20,18,14,.90) 0%,rgba(20,18,14,.45) 55%,rgba(20,18,14,.15) 100%)}
+.hs.en .hero::after{background:
+  linear-gradient(180deg,rgba(20,18,14,.35) 0%,transparent 35%,var(--bg) 100%),
+  linear-gradient(90deg,rgba(20,18,14,.90) 0%,rgba(20,18,14,.45) 55%,rgba(20,18,14,.15) 100%)}
+.hs .hero .wrap{width:100%;padding-block:96px 130px}
+.hs .hero-content{max-width:660px}
+.hs .eyebrow{display:inline-block;color:var(--gold);font-weight:700;font-size:15px;margin-bottom:18px}
+.hs.en .eyebrow{letter-spacing:.16em;text-transform:uppercase;font-size:13px}
+.hs .hero h1{font-size:clamp(44px,7vw,92px)}
+.hs .gold{color:var(--gold)}
+.hs .hero p.sub{max-width:520px;color:var(--ink);opacity:.82;font-size:19px;margin:22px 0 34px}
+.hs .cta{display:flex;flex-wrap:wrap;gap:14px}
+.hs .hero-content>*{opacity:0;transform:translateY(22px);animation:up .9s cubic-bezier(.2,.7,.2,1) forwards}
+.hs .hero-content>*:nth-child(2){animation-delay:.12s}
+.hs .hero-content>*:nth-child(3){animation-delay:.24s}
+.hs .hero-content>*:nth-child(4){animation-delay:.36s}
+@keyframes up{to{opacity:1;transform:none}}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.09)}}
+.hs .js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.hs .js .rv.in{opacity:1;transform:none}
+.hs .js .rv.d1{transition-delay:.1s}
+.hs .js .rv.d2{transition-delay:.2s}
+.hs .js .rv.d3{transition-delay:.3s}
+@media(prefers-reduced-motion:reduce){.hs .hero-img,.hs .hero-content>*{animation:none;opacity:1;transform:none}
+.hs .js .rv{opacity:1;transform:none;transition:none}}
+.hs .sec{padding-block:104px}
+.hs .sec h2{font-size:clamp(32px,4.4vw,56px)}
+.hs .sec .lead{font-size:18px;max-width:540px;margin:22px 0 0}
+.hs .forest{background:linear-gradient(180deg,var(--forest),#182A1E);color:var(--beige)}
+.hs .forest .eyebrow{color:var(--gold)}
+.hs .forest .lead{color:#CFD6C4}
+.hs .about .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr));gap:64px;align-items:start}
+.hs .points{border-top:1px solid rgba(232,220,194,.22)}
+.hs .point{display:grid;grid-template-columns:56px 1fr;gap:16px;padding:26px 0;border-bottom:1px solid rgba(232,220,194,.22)}
+.hs .point b{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;color:var(--gold)}
+.hs .point h3{font-size:24px;margin-bottom:4px}
+.hs .point p{margin:0;font-size:16px;color:#CFD6C4}
+.hs .moments{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px;margin-top:44px}
+.hs .moment,.hs .tile{position:relative;border-radius:22px;overflow:hidden;isolation:isolate;background:var(--bg2)}
+.hs .moment{aspect-ratio:4/5;display:flex;align-items:flex-end}
+.hs .moment::before,.hs .tile::before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--img,none),linear-gradient(155deg,#3A3120,#1C1913 60%,#1F3325);background-size:cover;background-position:center;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.hs .moment::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 40%,rgba(14,12,9,.88))}
+.hs .moment:hover::before,.hs .tile:hover::before{transform:scale(1.07)}
+.hs .moment div{padding:24px}
+.hs .moment h3{font-size:26px}
+.hs .moment p{margin:4px 0 0;color:var(--mute);font-size:15px}
+.hs .gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:220px;gap:14px;margin-top:44px}
+.hs .tile.g1{grid-column:span 2;grid-row:span 2}
+.hs .tile.g4{grid-row:span 2}
+.hs .tile.g5{grid-column:span 2}
+@media(max-width:760px){.hs .gal{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:170px}
+.hs .tile.g1{grid-column:span 2}
+.hs .tile.g5{grid-column:span 2}}
+.hs .tabs{display:flex;flex-wrap:wrap;gap:10px;margin:36px 0 44px}
+.hs .tab{min-height:46px;padding:0 22px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--ink);font:inherit;font-weight:700;cursor:pointer;transition:background .2s,color .2s}
+.hs .tab:hover{background:rgba(241,232,212,.08)}
+.hs .tab[aria-selected=true]{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.hs .items{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:0 72px}
+.hs .item{padding:20px 0;border-bottom:1px solid var(--line)}
+.hs .item .row{display:flex;align-items:baseline;gap:12px}
+.hs .item h3{font-size:22px}
+.hs .item .dots{flex:1;border-bottom:1px dotted rgba(241,232,212,.3);transform:translateY(-4px)}
+.hs .item .price{color:var(--gold);font-weight:700;white-space:nowrap}
+.hs .item p{margin:6px 0 0;color:var(--mute);font-size:15px}
+.hs .note{margin-top:28px;color:var(--mute);font-size:14px}
+.hs .vibe{background:var(--bg2);border-block:1px solid var(--line)}
+.hs .vibe .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:56px;align-items:center}
+.hs .vibe .cta{margin-top:30px}
+.hs .player{justify-self:stretch;width:100%;border-radius:28px;overflow:hidden;border:1px solid var(--line);background:#000;box-shadow:0 30px 80px -30px rgba(242,181,30,.35)}
+.hs .player video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#000}
+.hs .visit .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(400px,100%),1fr));gap:56px;align-items:start}
+.hs .info dl{margin:32px 0 0;display:grid;gap:28px}
+.hs .info dt{color:var(--gold);font-weight:700;font-size:15px;margin-bottom:4px}
+.hs.en .info dt{letter-spacing:.14em;text-transform:uppercase;font-size:13px}
+.hs .info dd{margin:0;font-size:18px}
+.hs .hours{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding:8px 0}
+.hs .info .ph{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.hs .info .ph a.num{font-weight:700;font-size:22px;direction:ltr;unicode-bidi:isolate}
+.hs .info .ph a.num:hover{color:var(--gold)}
+.hs .card{background:var(--beige);color:var(--beige-ink);border-radius:24px;padding:36px;box-shadow:0 40px 80px -40px rgba(0,0,0,.7)}
+.hs .card h3{font-size:30px;margin-bottom:24px}
+.hs .form{display:grid;gap:16px}
+.hs .form .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr));gap:16px}
+.hs label{display:grid;gap:6px;font-weight:700;font-size:14px}
+.hs input,.hs select{min-height:48px;padding:0 14px;border-radius:12px;border:1px solid #8D8369;background:#FBF8F0;font:inherit;color:var(--beige-ink)}
+.hs .card .btn{background:var(--forest2);color:var(--beige)}
+.hs .card .btn:hover{background:var(--forest);box-shadow:none}
+.hs .card .btn.wa{background:none;color:var(--beige-ink);border:1px solid #8D8369}
+.hs .card .btn.wa:hover{background:rgba(30,26,18,.07)}
+.hs .status{min-height:22px;font-size:14px;color:var(--beige-mute);margin:0}
+.hs footer{border-top:1px solid var(--line);padding-block:48px;color:var(--mute)}
+.hs footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
+.hs footer ul{display:flex;flex-wrap:wrap;gap:24px;list-style:none;margin:0;padding:0}
+.hs footer a:hover{color:var(--gold)}
+.hs footer small.c{font-size:14px}
+.hs .wa-float{position:fixed;inset-inline-end:20px;bottom:20px;z-index:30;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 12px 30px -8px rgba(0,0,0,.6);transition:transform .2s}
+.hs .wa-float:hover{transform:scale(1.08)}
+.hs .wa-float svg{width:30px;height:30px;fill:currentColor}
+.hs .m1{--img:url(./assets/71ca178a1052a288e49684a15cdeb0ef.jpg)}
+.hs .m2{--img:url(./assets/7bf977f048ab591d9efbd291918b9c60.jpg)}
+.hs .m3{--img:url(./assets/d2836f493f820d0d06099d16af447586.jpg)}
+.hs .g1{--img:url(./assets/1f115cd041856928c5afcd65c0f4dd4f.jpg)}
+.hs .g2{--img:url(./assets/69be90b579f25da3e080632e667dca11.jpg)}
+.hs .g3{--img:url(./assets/20a9ab0c2808adfae731364a31ea3de7.jpg)}
+.hs .g4{--img:url(./assets/e940c6c06755de634be15606c83cf795.jpg)}
+.hs .g5{--img:url(./assets/849da01bdfc6f946dd53160325ca763e.jpg)}
+.hs .g6{--img:url(./assets/1a78e979a34c1cc01b3fea35b7cdd742.jpg)}
+</style>
+</helmet>
+<div class="hs ar" dir="rtl" lang="ar" style="--gold: {{gold}}">
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="HAN-S Restaurant and Cafe">
+      <img class="mark" src="./assets/ca5b55b2243318ab5d696291b65871be.png" alt="HAN-S" width="46" height="46">
+      <span>HAN-S<small>Restaurant &amp; Cafe</small></span>
+    </a>
+    <nav class="links" aria-label="Main">
+      <a href="#about">عن الكافيه</a>
+      <a href="#menu">المنيو</a>
+      <a href="#gallery">صور المكان</a>
+      <a href="#vibe">أجواء HAN-S</a>
+      <a href="#visit">زورونا</a>
+    </nav>
+    <div class="tools">
+      <button class="lang" id="lang" type="button" aria-label="Switch to English">EN</button>
+      <a class="btn" href="#reserve">احجز طاولتك</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-img"></div>
+        <div class="wrap">
+      <div class="hero-content">
+        <span class="eyebrow">HAN-S · مطعم وكافيه</span>
+        <h1><span>خد وقتك،</span><br><span class="gold">واستمتع بمزاجك.</span></h1>
+        <p class="sub">قهوة على مهل، وأكل حقيقي، وقعدة هادية وسط الخشب والنباتات والإضاءة الدافية.</p>
+        <div class="cta">
+          <a class="btn" href="#menu">شوف المنيو</a>
+          <a class="btn ghost" href="#reserve">احجز طاولتك</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec forest about" id="about">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">عن الكافيه</span>
+        <h2>مكان بيشبهك. هادي ودافي.</h2>
+        <p class="lead">في HAN-S هتلاقي قهوة متظبطة، ومطبخ بيطبخ بجد، وحاجة حلوة تقفل بيها القعدة. خشب طبيعي ونباتات وإضاءة هادية، عشان تاخد وقتك.</p>
+      </div>
+      <div class="points">
+        <div class="point"><b>01</b><div><h3>بار القهوة</h3><p>إسبريسو، مشروبات بالحليب، قهوة تركي ومشروبات باردة.</p></div></div>
+        <div class="point"><b>02</b><div><h3>المطبخ</h3><p>فطار، أطباق رئيسية، باستا وبيتزا وسلطات.</p></div></div>
+        <div class="point"><b>03</b><div><h3>الحلويات</h3><p>حاجة حلوة تقفل بيها القعدة.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="moments">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">لحظات</span>
+        <h2>لحظات تستاهل تتعاش.</h2>
+      </div>
+      <div class="moments">
+        <article class="moment m1"><div><h3>قهوة على مهل</h3><p>كوباية بتاخد وقتها</p></div></article>
+        <article class="moment m2"><div><h3>أكل حقيقي</h3><p>أطباق بتتعمل بجد</p></div></article>
+        <article class="moment m3"><div><h3>موود على مزاجك</h3><p>لاتيه وفن في الكوباية</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="menu">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">المنيو</span>
+        <h2>اختار على مزاجك.</h2>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Menu categories">
+<sc-for list="{{tabs}}" as="tab" hint-placeholder-count="5"><button class="tab" type="button" role="tab" aria-selected="{{tab.sel}}" onClick="{{tab.pick}}">{{tab.label}}</button></sc-for>
+</div>
+      <div class="items" role="tabpanel">
+<sc-for list="{{items}}" as="it" hint-placeholder-count="6"><div class="item"><div class="row"><h3>{{it.name}}</h3><span class="dots"></span><span class="price">{{it.price}}</span></div><p>{{it.desc}}</p></div></sc-for>
+</div>
+      <p class="note">الأسعار بالجنيه المصري. الأصناف والأسعار قابلة للتعديل.</p>
+    </div>
+  </section>
+
+  <section class="sec forest" id="gallery">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">صور المكان</span>
+        <h2>الخشب، النباتات، والإضاءة الدافية.</h2>
+      </div>
+      <div class="gal">
+        <div class="tile g1" role="img" aria-label="HAN-S"></div>
+        <div class="tile g2" role="img" aria-label="HAN-S"></div>
+        <div class="tile g3" role="img" aria-label="HAN-S"></div>
+        <div class="tile g4" role="img" aria-label="HAN-S"></div>
+        <div class="tile g5" role="img" aria-label="HAN-S"></div>
+        <div class="tile g6" role="img" aria-label="HAN-S"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec vibe" id="vibe">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">أجواء</span>
+        <h2>شوف أجواء HAN-S</h2>
+        <p class="lead">لقطة من جو المكان قبل ما تيجي.</p>
+        <div class="cta"><a class="btn" href="#reserve">احجز طاولتك</a></div>
+      </div>
+      <div class="player">
+        <video controls="" playsinline="" preload="metadata" poster="./assets/fc6e9d56cff73a0616aa250168b472ae.jpg" aria-label="HAN-S"><source src="./assets/9d71a63986581ea7f2b23c02cf54a7e8.mp4" type="video/mp4"></video>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec visit" id="visit">
+    <div class="wrap">
+      <div class="info">
+        <span class="eyebrow">زورونا</span>
+        <h2>تعالى لحد الباب.</h2>
+        <dl>
+          <div><dt>العنوان</dt><dd><span>[العنوان]</span><br><a class="btn alt" style="margin-top:12px" href="https://maps.app.goo.gl/NDhBrJpFnvSfAXCT7" target="_blank" rel="noopener">افتح في خرائط جوجل</a></dd></div>
+          <div><dt>مواعيد العمل</dt>
+            <dd>
+              <div class="hours"><span>الأحد – الخميس</span><span dir="ltr">[HH:MM – HH:MM]</span></div>
+              <div class="hours"><span>الجمعة – السبت</span><span dir="ltr">[HH:MM – HH:MM]</span></div>
+            </dd></div>
+          <div><dt>تليفون وواتساب</dt>
+            <dd class="ph"><a class="num" href="tel:+201066836125">01066836125</a>
+              <a class="btn alt" href="https://wa.me/201066836125" target="_blank" rel="noopener">كلمنا على واتساب</a></dd></div>
+        </dl>
+      </div>
+      <div class="card" id="reserve">
+        <h3>احجز طاولتك</h3>
+        <form class="form" id="form">
+          <label><span>الاسم</span><input name="name" type="text" autocomplete="name" required=""></label>
+          <label><span>رقم الموبايل</span><input name="phone" type="tel" autocomplete="tel" required=""></label>
+          <div class="two">
+            <label><span>التاريخ</span><input name="date" type="date" required=""></label>
+            <label><span>الوقت</span><input name="time" type="time" required=""></label>
+          </div>
+          <label><span>عدد الأفراد</span>
+            <select name="guests"><option>1</option><option selected="">2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select>
+          </label>
+          <button class="btn" type="submit">أرسل طلب الحجز</button>
+          <a class="btn wa" id="waBook" href="https://wa.me/201066836125" target="_blank" rel="noopener">أو احجز على واتساب</a>
+          <p class="status" id="status" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="HAN-S">
+      <img class="mark" src="./assets/ca5b55b2243318ab5d696291b65871be.png" alt="HAN-S" width="46" height="46">
+    </a>
+    <ul>
+      <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="#" target="_blank" rel="noopener">Facebook</a></li>
+      <li><a href="#" target="_blank" rel="noopener">TikTok</a></li>
+    </ul>
+    <small class="tagline" style="font-weight:500;letter-spacing:.22em;font-size:12px;color:#E8956B">WHERE STORIES ARE MADE</small>
+    <small class="c">© 2026 HAN-S Restaurant and Cafe</small>
+  </div>
+</footer>
+
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"gold":{"editor":"color","default":"#F2B51E","options":["#F2B51E","#E08A3C","#C9D98A","#EBE0CE"]},"$preview":{"width":1440,"height":5900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cat: 0 };
+  }
+  renderVals() {
+    const MENU = [{"label":"القهوة","items":[["إسبريسو","قصير ومركّز وقوي."],["كابتشينو","إسبريسو مع حليب وفوم."],["فلات وايت","شوتين ناعمين مع حليب مخملي."],["سبانش لاتيه","لاتيه مع حليب مكثف."],["قهوة تركي","تقليدية، بتتقدم في كنكة."],["في ٦٠","قهوة فلتر محضّرة يدويًا."]]},{"label":"مشروبات باردة","items":[["آيس لاتيه","إسبريسو على حليب بارد وتلج."],["آيس سبانش لاتيه","حلو وكريمي وبارد."],["عصير برتقال فريش","متعصّر في وقته."],["ليمون بالنعناع","منعش ومظبوط."],["سموذي مانجو","مخلوط مع تلج."]]},{"label":"الفطار","items":[["شكشوكة","بيض في صلصة طماطم متبلة مع عيش."],["فول مدمس","فول بالزيت والكمون."],["أفوكادو توست","توست مع أفوكادو وبيض."],["كرواسون بالجبنة","سخن ومحمّر بالزبدة."],["بان كيك","مع شراب وزبدة."]]},{"label":"الأطباق الرئيسية","items":[["برجر الشيف","قطعة لحم مع جبنة وصوص المكان."],["طبق دجاج مشوي","مع أرز أو بطاطس وخضار."],["باستا دجاج بالكريمة","باستا في صلصة كريمة."],["بيتزا مارجريتا","طماطم وموتزاريلا وريحان."],["سلطة سيزر","خس مقرمش وقطع توست وبارميزان."]]},{"label":"الحلويات","items":[["تشيز كيك","كريمي على قاعدة بسكويت."],["مولتن كيك","سخن بقلب شوكولاتة سايح."],["تيراميسو","طبقات بالقهوة والماسكاربوني."],["وافل","وافل مقرمش بالتوبينج اللي تحبه."],["بسبوسة وآيس كريم","كلاسيك سخن مع سكوب بارد."]]}];
+    const cat = this.state.cat;
+    return {
+      gold: this.props.gold ?? '#F2B51E',
+      tabs: MENU.map((c, i) => ({
+        label: c.label,
+        sel: i === cat ? 'true' : 'false',
+        pick: () => this.setState({ cat: i })
+      })),
+      items: MENU[cat].items.map((it) => ({ name: it[0], desc: it[1], price: 'ج.م 00' }))
+    };
+  }
+}
+</script>
+</body>
+</html>
